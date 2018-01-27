@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux基础知识 | Neutrino</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="###
+1:变量杂项注意
+source file #不创建新的进程，通常用来使新修改的脚本立即生效
+“”      #弱引用
+‘’      #强引用
+函数里面局部变量加local，否则就是全局变量环境变量
+export PATH=./:$PATH   (直到本shell消亡）
+env -i ./:$PATH hehe.sh (本条命令临时作用)
+
+
+2: 参数
+
+
+符号
+含义
+
+
+
+
+*
+用一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础知识">
+<meta property="og:url" content="https://IMNeutrino.github.io/2016/09/23/linux-shell-000-基础知识/index.html">
+<meta property="og:site_name" content="Neutrino">
+<meta property="og:description" content="###
+1:变量杂项注意
+source file #不创建新的进程，通常用来使新修改的脚本立即生效
+“”      #弱引用
+‘’      #强引用
+函数里面局部变量加local，否则就是全局变量环境变量
+export PATH=./:$PATH   (直到本shell消亡）
+env -i ./:$PATH hehe.sh (本条命令临时作用)
+
+
+2: 参数
+
+
+符号
+含义
+
+
+
+
+*
+用一个">
+<meta property="og:updated_time" content="2016-09-23T15:14:44.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础知识">
+<meta name="twitter:description" content="###
+1:变量杂项注意
+source file #不创建新的进程，通常用来使新修改的脚本立即生效
+“”      #弱引用
+‘’      #强引用
+函数里面局部变量加local，否则就是全局变量环境变量
+export PATH=./:$PATH   (直到本shell消亡）
+env -i ./:$PATH hehe.sh (本条命令临时作用)
+
+
+2: 参数
+
+
+符号
+含义
+
+
+
+
+*
+用一个">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-变量"><span class="toc-text">1:变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#杂项注意"><span class="toc-text">杂项注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-参数"><span class="toc-text">2: 参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-特殊文件"><span class="toc-text">3: 特殊文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dev-tty"><span class="toc-text">/dev/tty</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-bash"><span class="toc-text">4:bash</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-linux-shell-000-基础知识" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">linux基础知识</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.09.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>BluekyZhao</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://IMNeutrino.github.io/2016/09/23/linux-shell-000-基础知识/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>###</p>
+<h1 id="1-变量"><a href="#1-变量" class="headerlink" title="1:变量"></a>1:变量</h1><h3 id="杂项注意"><a href="#杂项注意" class="headerlink" title="杂项注意"></a>杂项注意</h3><ol>
+<li>source file #不创建新的进程，通常用来使新修改的脚本立即生效</li>
+<li>“”      #弱引用</li>
+<li>‘’      #强引用</li>
+<li>函数里面局部变量加local，否则就是全局变量<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3></li>
+<li>export PATH=./:$PATH   (直到本shell消亡）</li>
+<li>env -i ./:$PATH hehe.sh (本条命令临时作用)</li>
+</ol>
+<hr>
+<h1 id="2-参数"><a href="#2-参数" class="headerlink" title="2: 参数"></a>2: 参数</h1><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>用一个单字符串显示所有向脚本传递的参数</td>
+</tr>
+<tr>
+<td>@</td>
+<td>用多个词显示所有向脚本传递的参数</td>
+</tr>
+<tr>
+<td>#</td>
+<td>显示参数的数量</td>
+</tr>
+<tr>
+<td>$</td>
+<td>当前进程的ID号</td>
+</tr>
+<tr>
+<td>!</td>
+<td>后台运行的最后一个进程的ID号</td>
+</tr>
+<tr>
+<td>?</td>
+<td>最后命令的退出状态，只有0表示正确</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="3-特殊文件"><a href="#3-特殊文件" class="headerlink" title="3: 特殊文件"></a>3: 特殊文件</h1><p>###/dev/null ###<br>黑洞，进去的全没了，能干让终端闭嘴之类的事</p>
+<p>###/dev/zero ###<br>额，创建指定大小，并且初始化为空的文件，极少用</p>
+<h3 id="dev-tty"><a href="#dev-tty" class="headerlink" title="/dev/tty"></a>/dev/tty</h3><p>进到这里的东西全都被重定位到显示器上</p>
+<hr>
+<h1 id="4-bash"><a href="#4-bash" class="headerlink" title="4:bash"></a>4:bash</h1><p>/etc 下提供全局设置，但如果用户主目录下有同名文件，将会覆盖全局设置</p>
+<pre><code>/etc/environment
+/etc/profile
+/etc/bashrc
+
+~/.bash_profile
+~/.bashrc
+</code></pre>
+    
+  </div>
+</article>
+
+</div>
+
+
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://IMNeutrino.github.io/2016/09/23/linux-shell-000-基础知识/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

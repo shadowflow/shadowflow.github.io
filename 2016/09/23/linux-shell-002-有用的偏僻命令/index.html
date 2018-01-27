@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>偏僻的命令 | Neutrino</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="1：mkdirmkdir -p            #中间目录不存在也能创建
+2：read-p选项后面可以直接跟提示
+#!/bin/bash
+echo -n &amp;quot;Enter your name:&amp;quot;   //参数-n的作用是不换行，echo默认是换行
+read  name                   //从键盘输入
+echo &amp;quot;hello $name,welco">
+<meta property="og:type" content="article">
+<meta property="og:title" content="偏僻的命令">
+<meta property="og:url" content="https://IMNeutrino.github.io/2016/09/23/linux-shell-002-有用的偏僻命令/index.html">
+<meta property="og:site_name" content="Neutrino">
+<meta property="og:description" content="1：mkdirmkdir -p            #中间目录不存在也能创建
+2：read-p选项后面可以直接跟提示
+#!/bin/bash
+echo -n &amp;quot;Enter your name:&amp;quot;   //参数-n的作用是不换行，echo默认是换行
+read  name                   //从键盘输入
+echo &amp;quot;hello $name,welco">
+<meta property="og:updated_time" content="2016-09-24T00:42:07.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="偏僻的命令">
+<meta name="twitter:description" content="1：mkdirmkdir -p            #中间目录不存在也能创建
+2：read-p选项后面可以直接跟提示
+#!/bin/bash
+echo -n &amp;quot;Enter your name:&amp;quot;   //参数-n的作用是不换行，echo默认是换行
+read  name                   //从键盘输入
+echo &amp;quot;hello $name,welco">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1：mkdir"><span class="toc-text">1：mkdir</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2：read"><span class="toc-text">2：read</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3：test"><span class="toc-text">3：test</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、数值比较"><span class="toc-text">1、数值比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、字符串比较"><span class="toc-text">2、字符串比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、文件比较"><span class="toc-text">3、文件比较</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4：getopts"><span class="toc-text">4：getopts</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-linux-shell-002-有用的偏僻命令" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">偏僻的命令</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.09.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>BluekyZhao</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://IMNeutrino.github.io/2016/09/23/linux-shell-002-有用的偏僻命令/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="1：mkdir"><a href="#1：mkdir" class="headerlink" title="1：mkdir"></a>1：mkdir</h2><pre><code>mkdir -p            #中间目录不存在也能创建
+</code></pre><h2 id="2：read"><a href="#2：read" class="headerlink" title="2：read"></a>2：read</h2><p>-p选项后面可以直接跟提示</p>
+<pre><code>#!/bin/bash
+echo -n &quot;Enter your name:&quot;   //参数-n的作用是不换行，echo默认是换行
+read  name                   //从键盘输入
+echo &quot;hello $name,welcome to my program&quot;     //显示信息
+exit 0                       //退出shell程序。
+--------------------------------------------------------------------------------------------
+#!/bin/bash
+read -p &quot;Enter your name:&quot; name
+echo &quot;hello $name, welcome to my program&quot;
+exit 0
+</code></pre><p>该例子使用了-n选项，后接数值1，指示read命令只要接受到一个字符就退出。只要按下一个字符进行回答，read命令立即</p>
+<pre><code>#!/bin/bash
+read -n1 -p &quot;Do you want to continue [Y/N]?&quot; answer
+case $answer in
+Y | y)
+      echo &quot;fine ,continue&quot;;;
+N | n)
+      echo &quot;ok,good bye&quot;;;
+*)
+     echo &quot;error choice&quot;;;
+esac
+exit 0
+</code></pre><p>-s选项能够使read命令中输入的数据不显示在监视器上（实际上，数据是显示的，只是 read命令将文本颜色设置成与背景相同的颜色）。</p>
+<pre><code>#!/bin/bash
+read  -s  -p &quot;Enter your password:&quot; pass
+echo &quot;your password is $pass&quot;
+exit 0 
+</code></pre><p>读取文件的关键是如何将文本中的数据传送给read命令。<br>最常用的方法是对文件使用cat命令并通过管道将结果直接传送给包含read命令的 while命令<br>例子::</p>
+<pre><code>#!/bin/bash
+count=1    //赋值语句，不加空格
+cat test | while read line        //cat 命令的输出作为read命令的输入,read读到的值放在line中
+do
+       echo &quot;Line $count:$line&quot;
+       count=$[ $count + 1 ]          //注意中括号中的空格。
+done
+echo &quot;finish&quot;
+exit 0
+</code></pre><h2 id="3：test"><a href="#3：test" class="headerlink" title="3：test"></a>3：test</h2><pre><code>test condition   ||   [ condition ] #括号两面有空格
+</code></pre><h4 id="1、数值比较"><a href="#1、数值比较" class="headerlink" title="1、数值比较"></a>1、数值比较</h4><table>
+<thead>
+<tr>
+<th>比 较 描 述</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n1 -eq n2</td>
+<td>检查n1是否与n2相等 (equal) </td>
+</tr>
+<tr>
+<td>n1 -ge n2</td>
+<td>检查n1是否大于或等于n2 (greater and equal) </td>
+</tr>
+<tr>
+<td>n1 -gt n2</td>
+<td>检查n1是否大于n2 (greater than) </td>
+</tr>
+<tr>
+<td>n1 -le n2</td>
+<td>检查n1是否小于或等于n2 (less and equal) </td>
+</tr>
+<tr>
+<td>n1 -lt n2</td>
+<td>检查n1是否小于n2 (less than) </td>
+</tr>
+<tr>
+<td>n1 -ne n2</td>
+<td>检查n1是否不等于n2 (not equal) </td>
+</tr>
+</tbody>
+</table>
+<h4 id="2、字符串比较"><a href="#2、字符串比较" class="headerlink" title="2、字符串比较"></a>2、字符串比较</h4><p>需要注意的是：</p>
+<ul>
+<li>字符串比较大于小于号必须转义，即加反斜线。 </li>
+<li>字符串比较的顺序是按ASCII表的顺序的，大写字母比小写字母的值小。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>比 较 描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str1 = str2</td>
+<td>检查str1是否和str2相同 </td>
+</tr>
+<tr>
+<td>str1 != str2</td>
+<td>检查str1是否和str2不同 </td>
+</tr>
+<tr>
+<td>str1 &lt; str2</td>
+<td>检查str1是否比str2小 </td>
+</tr>
+<tr>
+<td>str1 &gt; str2</td>
+<td>检查str1是否比str2大 </td>
+</tr>
+<tr>
+<td>-n str1</td>
+<td>检查str1的长度是否非0 </td>
+</tr>
+<tr>
+<td>-z str1</td>
+<td>检查str1的长度是否为0 </td>
+</tr>
+</tbody>
+</table>
+<h4 id="3、文件比较"><a href="#3、文件比较" class="headerlink" title="3、文件比较"></a>3、文件比较</h4><table>
+<thead>
+<tr>
+<th>比 较 描 述</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d file</td>
+<td>检查file是否存在并是一个目录 </td>
+</tr>
+<tr>
+<td>-e file</td>
+<td>检查file是否存在 </td>
+</tr>
+<tr>
+<td>-f file</td>
+<td>检查file是否存在并是一个文件 </td>
+</tr>
+<tr>
+<td>-r file</td>
+<td>检查file是否存在并可读 </td>
+</tr>
+<tr>
+<td>-s file</td>
+<td>检查file是否存在并非空 </td>
+</tr>
+<tr>
+<td>-w file</td>
+<td>检查file是否存在并可写 </td>
+</tr>
+<tr>
+<td>-x file</td>
+<td>检查file是否存在并可执行 </td>
+</tr>
+<tr>
+<td>-O file</td>
+<td>检查file是否存在并属当前用户所有 </td>
+</tr>
+<tr>
+<td>-G file</td>
+<td>检查file是否存在并且默认组与当前用户相同 </td>
+</tr>
+<tr>
+<td>file1 -nt file2</td>
+<td>检查file1是否比file2新 </td>
+</tr>
+<tr>
+<td>file1 -ot file2</td>
+<td>检查file1是否比file2旧 </td>
+</tr>
+</tbody>
+</table>
+<h2 id="4：getopts"><a href="#4：getopts" class="headerlink" title="4：getopts"></a>4：getopts</h2><p>getopts只能处理-f -a 这样的短参数，，getopt才可以处理–help这样的长参数</p>
+<pre><code>#!/bin/bash
+while getopts &quot;a:bc&quot; arg #选项后面的冒号表示该选项需要参数
+do
+    case $arg in
+         a)
+            echo &quot;a&apos;s arg:$OPTARG&quot; #参数存在$OPTARG中
+            ;;
+         b)
+            echo &quot;b&quot;
+            ;;
+         c)
+            echo &quot;c&quot;
+            ;;
+         ?)  #当有不认识的选项的时候arg为?
+        echo &quot;unkonw argument&quot;
+    exit 1
+    ;;
+    esac
+done
+</code></pre>
+    
+  </div>
+</article>
+
+</div>
+
+
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://IMNeutrino.github.io/2016/09/23/linux-shell-002-有用的偏僻命令/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

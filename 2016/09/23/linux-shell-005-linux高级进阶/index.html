@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux高级进阶 | Neutrino</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="注意：下面这些都不是一朝一夕就能成为大师的，需要不断运用、不断积累、冰冻三尺非一日之寒啊！
+一、正则表达式
+内容繁多，构造复杂，对中藏错，切须小心。
+二、文本处理awk1、命令行使用awk &amp;apos;{print $1}&amp;apos; example1.txt
+awk &amp;apos;{if($5&amp;gt;20 || $5==10) {print $1}}&amp;apos; example1.txt
+2、脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux高级进阶">
+<meta property="og:url" content="https://IMNeutrino.github.io/2016/09/23/linux-shell-005-linux高级进阶/index.html">
+<meta property="og:site_name" content="Neutrino">
+<meta property="og:description" content="注意：下面这些都不是一朝一夕就能成为大师的，需要不断运用、不断积累、冰冻三尺非一日之寒啊！
+一、正则表达式
+内容繁多，构造复杂，对中藏错，切须小心。
+二、文本处理awk1、命令行使用awk &amp;apos;{print $1}&amp;apos; example1.txt
+awk &amp;apos;{if($5&amp;gt;20 || $5==10) {print $1}}&amp;apos; example1.txt
+2、脚本">
+<meta property="og:updated_time" content="2016-09-24T00:48:28.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux高级进阶">
+<meta name="twitter:description" content="注意：下面这些都不是一朝一夕就能成为大师的，需要不断运用、不断积累、冰冻三尺非一日之寒啊！
+一、正则表达式
+内容繁多，构造复杂，对中藏错，切须小心。
+二、文本处理awk1、命令行使用awk &amp;apos;{print $1}&amp;apos; example1.txt
+awk &amp;apos;{if($5&amp;gt;20 || $5==10) {print $1}}&amp;apos; example1.txt
+2、脚本">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、正则表达式"><span class="toc-text">一、正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、文本处理awk"><span class="toc-text">二、文本处理awk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、命令行使用"><span class="toc-text">1、命令行使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、脚本使用"><span class="toc-text">2、脚本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、输出格式"><span class="toc-text">3、输出格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、控制语句"><span class="toc-text">4、控制语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-高级函数"><span class="toc-text">5 高级函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、流编辑器sed"><span class="toc-text">三、流编辑器sed</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、常用选项"><span class="toc-text">1、常用选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、常用命令"><span class="toc-text">2、常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、使用实例"><span class="toc-text">3、使用实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、ssh"><span class="toc-text">四、ssh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、screen"><span class="toc-text">五、screen</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、shell"><span class="toc-text">六、shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、vim"><span class="toc-text">七、vim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#—"><span class="toc-text">—</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-linux-shell-005-linux高级进阶" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">linux高级进阶</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.09.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>BluekyZhao</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://IMNeutrino.github.io/2016/09/23/linux-shell-005-linux高级进阶/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>注意：下面这些都不是一朝一夕就能成为大师的，需要不断运用、不断积累、冰冻三尺非一日之寒啊！</p>
+<h2 id="一、正则表达式"><a href="#一、正则表达式" class="headerlink" title="一、正则表达式"></a>一、正则表达式</h2><blockquote>
+<p>内容繁多，构造复杂，对中藏错，切须小心。</p>
+<h2 id="二、文本处理awk"><a href="#二、文本处理awk" class="headerlink" title="二、文本处理awk"></a>二、文本处理awk</h2><h4 id="1、命令行使用"><a href="#1、命令行使用" class="headerlink" title="1、命令行使用"></a>1、命令行使用</h4><pre><code>awk &apos;{print $1}&apos; example1.txt
+awk &apos;{if($5&gt;20 || $5==10) {print $1}}&apos; example1.txt
+</code></pre><h4 id="2、脚本使用"><a href="#2、脚本使用" class="headerlink" title="2、脚本使用"></a>2、脚本使用</h4><pre><code>BEGIN {         # “BEGIN{”是awk脚本开始的地方
+    FS=&quot;:&quot;;     # FS 是在awk里指分割符的意思
+}
+</code></pre></blockquote>
+<pre><code>{
+      print &quot;uid=&quot; $1;
+      print &quot;userPassword=&quot; $2;
+      print &quot;domain=eyou.com&quot; ;
+}                               # “}”    内容部分结束
+END {                           # “END{” 结束部分
+    print &quot;exit&quot;;
+}
+</code></pre><h4 id="3、输出格式"><a href="#3、输出格式" class="headerlink" title="3、输出格式"></a>3、输出格式</h4><pre><code>awk -F: &apos;{print $1&quot;@&quot;$2}&apos; example2.txt
+awk -F: &apos;{printf &quot;%s@%s/n&quot;,$1,$2}&apos; example2.txt
+</code></pre><h4 id="4、控制语句"><a href="#4、控制语句" class="headerlink" title="4、控制语句"></a>4、控制语句</h4><pre><code>if、do、while、for 都是支持的！
+
+if (condition) statement [ else statement ]
+while (condition) statement
+do statement while (condition)
+for (expr1; expr2; expr3) statement
+for (var in array) statement
+break
+continue
+delete array[index]
+delete array     
+exit [ expression ]
+{ statements }
+</code></pre><h4 id="5-高级函数"><a href="#5-高级函数" class="headerlink" title="5 高级函数"></a>5 高级函数</h4><pre><code>example3.txt
+13910011234      
+15920312343
+3922342134
+15922334422
+
+awk &apos;{print substr($1,1,3)}&apos;  example3.txt          #substr($1,1,3)表示从第一个字符开始，向后取出共三个字符
+
+awk &apos;{printf &quot;%s/%s/n&quot;,substr($1,1,3),substr($1,4,2)}&apos;  example3.txt
+awk &apos;{printf &quot;mv %s %s/%s/n&quot;,$1,substr($1,1,3),substr($1,4,2)}&apos;  example3.txt
+</code></pre><h2 id="三、流编辑器sed"><a href="#三、流编辑器sed" class="headerlink" title="三、流编辑器sed"></a>三、流编辑器sed</h2><h4 id="1、常用选项"><a href="#1、常用选项" class="headerlink" title="1、常用选项"></a>1、常用选项</h4><pre><code>-n∶    使用安静(silent)模式。在一般 sed 的用法中，所有来自 STDIN的资料一般都会被列出到萤幕上。但如果加上 -n 参数后，则只有经过sed 特殊处理的那一行(或者动作)才会被列出来。
+-e∶    直接在指令列模式上进行 sed 的动作编辑；
+-f∶    直接将 sed 的动作写在一个档案内， -f filename 则可以执行 filename 内的sed 动作；
+-r∶    sed 的动作支援的是延伸型正规表示法的语法。(预设是基础正规表示法语法)
+-i∶    直接修改读取的档案内容，而不是由萤幕输出。       
+</code></pre><h4 id="2、常用命令"><a href="#2、常用命令" class="headerlink" title="2、常用命令"></a>2、常用命令</h4><pre><code>a   ∶新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～
+c   ∶取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！
+d   ∶删除，因为是删除啊，所以 d 后面通常不接任何咚咚；
+i   ∶插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；
+p   ∶列印，亦即将某个选择的资料印出。通常 p 会与参数 sed -n 一起运作～
+s   ∶取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！
+</code></pre><h4 id="3、使用实例"><a href="#3、使用实例" class="headerlink" title="3、使用实例"></a>3、使用实例</h4><p>删除某行</p>
+<pre><code>[root@localhost ruby] # sed &apos;1d&apos; ab              #删除第一行 
+[root@localhost ruby] # sed &apos;$d&apos; ab              #删除最后一行
+[root@localhost ruby] # sed &apos;1,2d&apos; ab           #删除第一行到第二行
+[root@localhost ruby] # sed &apos;2,$d&apos; ab           #删除第二行到最后一行
+</code></pre><p>显示某行</p>
+<pre><code>[root@localhost ruby] # sed -n &apos;1p&apos; ab           #显示第一行 
+[root@localhost ruby] # sed -n &apos;$p&apos; ab           #显示最后一行
+[root@localhost ruby] # sed -n &apos;1,2p&apos; ab        #显示第一行到第二行
+[root@localhost ruby] # sed -n &apos;2,$p&apos; ab        #显示第二行到最后一行
+</code></pre><p>使用模式进行查询</p>
+<pre><code>[root@localhost ruby] # sed -n &apos;/ruby/p&apos; ab    #查询包括关键字ruby所在所有行
+[root@localhost ruby] # sed -n &apos;/\$/p&apos; ab        #查询包括关键字$所在所有行，使用反斜线\屏蔽特殊含义
+</code></pre><p>增加一行或多行字符串</p>
+<pre><code> [root@localhost ruby]# cat ab
+ Hello!
+ ruby is me,welcome to my blog.
+ end
+-----------------------------------------------------------------------------------
+ [root@localhost ruby] # sed &apos;1a drink tea&apos; ab  #第一行后增加字符串&quot;drink tea&quot;
+ Hello!
+ drink tea
+ ruby is me,welcome to my blog. 
+ end
+-----------------------------------------------------------------------------------
+ [root@localhost ruby] # sed &apos;1,3a drink tea&apos; ab #第一行到第三行后增加字符串&quot;drink tea&quot;
+ Hello!
+ drink tea
+ ruby is me,welcome to my blog.
+ drink tea
+ end
+ drink tea
+-----------------------------------------------------------------------------------
+ [root@localhost ruby] # sed &apos;1a drink tea\nor coffee&apos; ab   #第一行后增加多行，使用换行符\n
+ Hello!
+ drink tea
+ or coffee
+ ruby is me,welcome to my blog.
+ end
+</code></pre><p>代替一行或多行</p>
+<pre><code>[root@localhost ruby] # sed &apos;1c Hi&apos; ab                #第一行代替为Hi
+Hi
+ruby is me,welcome to my blog.
+end
+[root@localhost ruby] # sed &apos;1,2c Hi&apos; ab             #第一行到第二行代替为Hi
+Hi
+end
+</code></pre><p>替换一行中的某部分<br>格式：sed ‘s/要替换的字符串/新的字符串/g’   （要替换的字符串可以用正则表达式）</p>
+<pre><code>[root@localhost ruby] # sed -n &apos;/ruby/p&apos; ab | sed &apos;s/ruby/bird/g&apos;    #替换ruby为bird
+[root@localhost ruby] # sed -n &apos;/ruby/p&apos; ab | sed &apos;s/ruby//g&apos;        #删除ruby插入
+[root@localhost ruby] # sed -i &apos;$a bye&apos; ab         #在文件ab中最后一行直接输入&quot;bye&quot;
+[root@localhost ruby]# cat ab
+Hello!
+ruby is me,welcome to my blog.
+end
+bye
+</code></pre><p>删除匹配行</p>
+<pre><code>sed -i &apos;/匹配字符串/d&apos;  filename  （注：若匹配字符串是变量，则需要“”，而不是‘’。记得好像是）替换匹配行中的某个字符串
+sed -i &apos;/匹配字符串/s/替换源字符串/替换目标字符串/g&apos; filename
+</code></pre><h2 id="四、ssh"><a href="#四、ssh" class="headerlink" title="四、ssh"></a>四、ssh</h2><pre><code>一种：账户密码验证的连接方式
+另一种：公钥秘钥的连接方式。。
+各种配置文件：去Google，去baidu、去man
+</code></pre><h2 id="五、screen"><a href="#五、screen" class="headerlink" title="五、screen"></a>五、screen</h2><pre><code>相当于打开一个虚拟桌面，其实一般用不到，除非你是特殊领域工作人员。
+</code></pre><h2 id="六、shell"><a href="#六、shell" class="headerlink" title="六、shell"></a>六、shell</h2><pre><code>人民邮电出版社的张昊程国刚主编的《Linux编程入门到精通》上有 各种shell功能参数对比，shell发展历史
+证明：bash是正统名门（sh）之后                    相当于《诛仙》林惊羽
+      zsh属于魔教但绝对强于bash                   相当于《诛仙》张小凡
+
+github上有oh-my-zsh项目，就是一堆zsh的配置文件，可以让zsh更加强大
+</code></pre><h2 id="七、vim"><a href="#七、vim" class="headerlink" title="七、vim"></a>七、vim</h2><pre><code>命令状态下：
+    ^            #去行首
+    $             #去行尾
+
+    G            # 去文件末尾
+    gg          # 去文件开头    
+    100G           # 跳到100行   
+
+    dd            #剪切
+    p            #粘贴
+
+    i            #光标字母之前进入insert模式
+    a            #光标字母之后进入insert模式
+    o            #下一行进入insert 模式
+
+    %s/ /:/g    #把空格替换成冒号
+    /bash         #文件中向下查询bash
+
+    掌握上面只是入门，其他还有好多高级用法，分屏、折叠什么的，师傅引进门，修行在个人！
+</code></pre><h2 id="—"><a href="#—" class="headerlink" title="—"></a>—</h2><p>总而言之，上面这些入门简单、想熟练掌握可不容易，要善学善思，敬上对联一副</p>
+<p>|<br>|有志者，事竟成；|破釜沉舟，百二秦关终属楚<br>|苦心人，天不负；|卧薪尝胆，三千越甲可吞吴</p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://IMNeutrino.github.io/2016/09/23/linux-shell-005-linux高级进阶/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
